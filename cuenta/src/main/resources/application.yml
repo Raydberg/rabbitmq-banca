@@ -13,5 +13,12 @@ queue:
   routing-key: cajero-key
 
 
+
+queue-notification:
+  name: NOTIFICACION.QUEUE
+  exchange: BANCO.EXCHANGE
+  routing-key: notification-key
+
+
 server:
   port: 8083

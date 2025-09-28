@@ -10,28 +10,56 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
     @Value("${queue.name}")
-    private String queueName;
+    private String cuentaQueueName;
 
     @Value("${queue.exchange}")
     private String exchangeName;
 
     @Value("${queue.routing-key}")
-    private String routingKey;
+    private String cuentaRoutingKey;
+
+    @Value("${queue-notification.name}")
+    private String queueNotificacionName;
+    @Value("${queue-notification.routing-key}")
+    private String routingKeyNotificacion;
+
 
     // NO se declara la cola (ya existe en RabbitMQ como quorum)
-
+    //Declaracion del intercambio
     @Bean
     public TopicExchange exchange() {
         return new TopicExchange(exchangeName);
     }
 
+    /**
+     * Configuracion para el QUEUE de CUENTA
+     *
+     */
+
     @Bean
-    public Binding binding(TopicExchange exchange) {
+    public Binding cuentaBinding(TopicExchange exchange) {
         return new Binding(
-                queueName,
+                cuentaQueueName,
                 Binding.DestinationType.QUEUE,
                 exchangeName,
-                routingKey,
+                cuentaRoutingKey,
+                null
+        );
+    }
+
+
+    /**
+     * Configuracion para el queue de NOTIFICACIONES
+     *
+     */
+
+    @Bean
+    public Binding notificationBinding(TopicExchange exchange) {
+        return new Binding(
+                queueNotificacionName,
+                Binding.DestinationType.QUEUE,
+                exchangeName,
+                routingKeyNotificacion,
                 null
         );
     }

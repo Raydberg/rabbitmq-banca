@@ -3,13 +3,14 @@ spring:
     name: notificacion
   rabbitmq:
     host: localhost
-    port: 16009
+    port: 5672
     username: admin
     password: admin123
 
 queue:
-  name:
-
+  name: NOTIFICACION.QUEUE
+  exchange: BANCO.EXCHANGE
+  routing-key: notification-key
 
 
 
