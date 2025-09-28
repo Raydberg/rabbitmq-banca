@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: notificacion
+  rabbitmq:
+    host: localhost
+    port: 16009
+    username: admin
+    password: admin123
+
+queue:
+  name:
+
+
+
+
+server:
+  port: 8082

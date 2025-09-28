@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: cuenta
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin123
+
+queue:
+  name: CUENTA.QUEUE
+  exchange: BANCO.EXCHANGE
+  routing-key: cajero-key
+
+
+server:
+  port: 8083
