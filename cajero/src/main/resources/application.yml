@@ -15,7 +15,9 @@ queue:
   routing-key: cajero-key
 
 
-
+cuenta:
+  service:
+    url: http://localhost:8083
 
 
 server:
