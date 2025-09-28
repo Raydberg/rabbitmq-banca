@@ -24,10 +24,16 @@ public class MessageSender {
 
 
     public void sendMessage(MessageDTO message) {
-        //Utiliza el convertidor de Jackson
-        rabbitTemplate.setMessageConverter(messageConverter);
-        //Enviamos el mensaje ya convertido en JSON
-        rabbitTemplate.convertAndSend(exchange, routingKey, message);
-        log.info("Mensaje enviado {}", message);
+        try {
+            //Utiliza el convertidor de Jackson
+            rabbitTemplate.setMessageConverter(messageConverter);
+            //Enviamos el mensaje ya convertido en JSON
+            rabbitTemplate.convertAndSend(exchange, routingKey, message);
+            log.info("Mensaje enviado {}", message);
+
+        } catch (
+                RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }

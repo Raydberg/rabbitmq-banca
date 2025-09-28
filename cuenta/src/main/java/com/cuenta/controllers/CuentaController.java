@@ -28,6 +28,7 @@ public class CuentaController {
         log.info("Saldo actualizado para la cuenta {}: nuevo saldo {}", cuentaIdLong, cuenta.getMonto());
         return ResponseEntity.ok("Saldo actualizado correctamente");
     }
+
     @PostMapping
     public ResponseEntity<String> enviarNotificacion(@RequestBody String message) {
         notificationSender.sendMessage(message);

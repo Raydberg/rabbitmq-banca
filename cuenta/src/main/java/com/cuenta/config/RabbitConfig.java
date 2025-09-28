@@ -20,6 +20,7 @@ public class RabbitConfig {
 
     @Value("${queue-notification.name}")
     private String queueNotificacionName;
+
     @Value("${queue-notification.routing-key}")
     private String routingKeyNotificacion;
 

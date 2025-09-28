@@ -26,7 +26,7 @@ queue:
 
 queue-notification:
   name: NOTIFICACION.QUEUE
-  exchange: BANCO.EXCHANGE
+#  exchange: BANCO.EXCHANGE
   routing-key: notification-key
 
 

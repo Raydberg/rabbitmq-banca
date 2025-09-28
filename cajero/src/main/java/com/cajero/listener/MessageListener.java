@@ -1,5 +1,6 @@
 package com.cajero.listener;
 
+import com.cajero.DTOs.MessageDTO;
 import com.cajero.clients.CuentaClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,15 +15,13 @@ public class MessageListener {
     private final CuentaClient cuentaClient;
 
     @RabbitListener(queues = "${queue.name}")
-    public void receiveApproved(String message) {
+    public void receiveApproved(MessageDTO message) {
         log.info("Mensaje recibido {}", message);
-        if (message.equals("Dinero retirado")) {
-            String cuentaId = "1";
-            Double monto = 10.0;
-
-            cuentaClient.actualizarSalgo(cuentaId, monto);
-            log.info("Salgo actualizado en el microservicio cuenta");
-
+        if (message.payload().monto() != null && message.cuenta() != null) {
+            cuentaClient.actualizarSalgo(message.cuenta(), message.payload().monto());
+            log.info("Saldo actualizado en el microservicio cuenta para la cuenta {}", message.cuenta());
+        } else {
+            log.error("El mensaje recibido no contiene datos válidos");
         }
     }
 }
